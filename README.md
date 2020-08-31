@@ -19,6 +19,9 @@ The WebDav feature is used to store application source data on apache-managed di
 A brief introduction is at the following page:  
 [kobu.com/livedata](https://kobu.com/livedata/index-en.html)
 
+For architecture and background behind this and other tools in the project, see:  
+[arch.html](https://kobu.com/author/arch.html)
+
 This document includes the following three parts:
 
 - Guide: Overview of Live Data Embedder
