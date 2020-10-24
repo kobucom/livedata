@@ -49,10 +49,12 @@ To use the local test script, install the following packages:
 	- DBI
 	- DBD::SQLite
 
-and run the following command:
+Embedder depends on some files in the sister project, Author.
+Clone the repository and run the following command:
 
 ```
-$ export PREPRO_DATA=/path/to/embedder
+$ export PREPRO_AUTHOR=/path/to/author/prepro
+$ export PREPRO_DATA=/path/to/livedata/prepro
 $ ./run-locally.sh
 ```
 
