@@ -21,8 +21,8 @@ A brief introduction page:
 
 See Embedder section of the overall PREPRO documentation:
 
-- [English](https://kobu.com/author/guide.html)
-- [Japansese](https://kobu.com/author/guide-en.html)
+- [English](https://kobu.com/author/guide-en.html)
+- [Japansese](https://kobu.com/author/guide.html)
 
 See Embedder section of PREPRO syntax summary, see [syntax.html](https://kobu.com/author/syntax.html) (English).
 
