@@ -1,0 +1,89 @@
+History of changes in Embedder.pm
+
+# 2020-may-11 started; design started in may-09
+# 2020-may-13 single row handling
+# 2020-may-14 table row template handling
+# 2020-may-15 ${?var}
+# 2020-may-17 ${!view}
+# 2020-may-21 no more data.cgi (shell) -> run as a perl cgi - ok
+# 2020-may 25 data.pl -> Embedder.pm + Context.pm + Row.pm
+# 2020-may-26 restructuring
+# 2020-may-27 Logger.pm
+# 2020-may-27 tested
+#  run-data-cgi at local - OK
+#  run-data-cgi on raspi - OK
+#  data-fe.cgi (cgi-bin) - OK
+#  data-fe.pl (mod_perl script) - looks working, no outpupt
+#  data-fe.fcgi (fast-cgi) - looks working, no output
+# 2020-may-29 web api (not tested yet)
+# 2020-may-30 split handle() to handle() calling embed()
+# 2020-may-31 multi-primary-key support
+# 2020-jun-01 input type= support
+# 2020-jun-04 action handling fixed - tested
+# 2020-jun-05 marked as v0.1
+# -----------
+# 2020-jun-11 tested under sakura5 (cloud)
+# 2020-jun-13 source redirect to admin (for schema.mdm)
+# 2020-jun-14 authenticate with REMOTE_USER
+# 2020-jun-15 add authenticated email to form
+# 2020-jun-17 web api syntax change
+# 2020-jun-23 replacer incorporated; ACCEPT_LANGUAGE supported
+# 2020-jul-01 run-through test on sakura5
+# 2020-jul-01 marked as v0.1b
+# -----------
+# 2020-jul-04 ${alt.var} - syntax only
+# 2020-jul-05 ${!action:link} - syntax only (no more)
+# 2020-jul-05 $form:link$
+# 2020-jul-15 page variable - ${.var} and ${+var} in form
+# 2020-jul-24 redirect - ${!action>link}
+# 2020-jul-25 callback-based handleMacros
+# 2020-jul-25 inner macros in link: [macro] or [.macro]
+# 2020-jul-29 page variable - ${=var} added
+# 2020-jul-29 no more Virtual.pm -> integrated in getPageTable()
+# 2020-jul-29 marked as v0.2
+# -----------
+# 2020-jul-31 no bare macro for missing page variable
+# 2020-aug-03 entry macro syntax extended (not tested yet)
+# 2020-aug-04 textarea supported
+# 2020-aug-04 value_list in textarea, default value, pattern tested
+# 2020-aug-04 table name with underbar supported; now 'auth-table_name-list.mdm'
+# 2020-aug-07 extra new line after $xxxx$ and before $end$
+# 2020-aug-07 extra debug level: DL_MARKDOWN
+# 2020-aug-07 required entry macro ${&var}
+# 2020-aug-07 bugfix - Util::limitHash() removed empty elements making column delete unavailable
+# 2020-aug-07 bugfix - pandoc -M option should be double-quoted
+# 2020-aug-08 run through test
+# 2020-aug-08 bugfix - empty pkey column disabled
+# 2020-aug-08 bugfix - length($value) should be used to treat 0 as valid data
+# 2020-aug-12 length($value) -> Util::has($value)
+# 2020-aug-13 passedKeys only on edit
+# 2020-aug-14 limited list for getPageVariable()
+# 2020-aug-14 nextKeys handling refactored; no more determieNextKeys()
+# 2020-aug-15 handleInnerMacros() shared by parseActionMacro() and handleFormBegin()
+# 2020-aug-15 submit button - ${!submit:title}
+# 2020-aug-15 buildFormUrl()
+# 2020-aug-18 {keys} and {row} handling on edit button
+# 2020-aug-22 back button in error page
+# 2020-aug-22 thorough tested 
+# 2020-aug-23 marked as v0.2b
+# -----------
+# 2020-sep-02 macro syntax change: ${...} -> $(...)
+# 2020-sep-02 pattern moved after defvalue in entry macro: $(?...#...~...)
+# 2020-sep-05 entry variable syntax change: required $(&...) -> $(??...)
+# 2020-sep-06 macro syntax design change:
+#   - parseHiddenParameter
+#     - page variables in form: +var, =var -> hidden parameters: $(+name[=value])
+#   - parseDisplayMacro
+#     - page variable anywhere: .var -> handled as part of display macro: $([[alt].]var)
+# 2020-sep-06 macro syntax change tested locally
+# 2020-sep-07 handline() calls expandMacros() and expandLinks()
+# -----
+# 2020-oct-15 refactoring due to author toos update
+# 2020-oct-15 account-specific stylesheet
+# 2020-oct-16 handleMacros() -> Parser::parseLine()
+# 2020-oct-16 independing macro modules: XxxMacro.pm
+# 2020-oct-17 frontend.cgi updated
+# 2020-oct-18 argument order changed: $context then $row come last
+# 2020-oct-21 no more buildFormUrl(); ticket now held in {control}
+# 2020-oct-23 {path_info} -> {path}, {path} -> {basename}, {filename} added
+# 2020-oct-24 marked as v0.3 - published
