@@ -3,7 +3,8 @@
 # 20-may-26 tested from Table.pm
 # 20-may-30 primary keys
 # 20-may-31 column names
-# 20-aug-09 backport: bind_values supported (sql-only case still usable)
+# 20-aug-09 fetchrow_array() -> fetchrow_hashref()
+# 20-aug-09 bind_values supported (sql-only case still usable)
 
 package DbiStore;
 
@@ -16,7 +17,7 @@ use DBI;
 #use Data::Dump qw(dump);
   # not standard
 
-use lib "$ENV{PREPRODIR}";
+use lib "$ENV{PREPRO_DATA}";
 use Logger;
 
 use constant { true => 1, false => 0 };
@@ -24,11 +25,10 @@ use constant { true => 1, false => 0 };
 # constructor($dbpath)
 sub new {
     my ($class, $dbpath) = @_;
-    my $logger = new Logger($ENV{DEBUG_LEVEL} // 0);
     return bless {
-        dbpath => $dbpath, # '/var/www/dav/bluff/data/customer'
-        dbh => undef,
-        logger => $logger,
+        dbpath => $dbpath, # '/var/www/dav/bluff/data/bluff.db'
+        logger => new Logger(), # per-store logger
+        dbh => undef
     }, $class;
 }
 
@@ -42,10 +42,11 @@ sub openStore {
     my $userid = undef; # '' -> $ENV{DBI_USER}
     my $password = undef; # '' -> $ENV{DBI_PASS}
     $self->{dbh} = DBI->connect($dsn, $userid, $password,
-        { RaiseError => 0, RaiseWarn => 0, AutoCommit => 1 }) 
+        { RaiseError => 0, AutoCommit => 1 }) 
             or die "openStore: $DBI::errstr";
         # returns undef on error
         # Note: PrintError and PrintWarn defaults to 1
+        # Note: RaiseWarn not recognized on sakura5 while wsl OK 
 }
 
 # $bool = selectTable($sql, $callback, [\@bind_values])
@@ -148,4 +149,4 @@ sub getColumns {
     return \@cols; # return reference
 }
 
-1; # need to end with a true value
+true; # need to end with a true value
